@@ -25,6 +25,16 @@ graph = {
   'k': []
 }
 
+
+# DAG visual representation
+# (v)--->(x)
+#  |
+#  |
+#  v
+# (w)
+
+# (y)--->(z)
+
 graph1 = {
   'v': ['x', 'w'],
   'w': [],
