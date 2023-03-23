@@ -3,7 +3,19 @@
 # The function should return a boolean indicating whether
 # or not there exists a directed path between the source and destination nodes.
 
-# graph is a dictonary 
+# DAG visual representation
+# (f)--->(g)--->(h)
+#  |     ^
+#  |    /
+#  |   /
+#  v  /
+# (i)<-----(j)
+#  | 
+#  |
+#  |
+#  v
+# (k)
+
 graph = {
   'f': ['g', 'i'],
   'g': ['h'],
@@ -20,15 +32,6 @@ graph1 = {
   'y': ['z'],
   'z': [],  
 }
-
-graph1 = {
-  'v': ['x', 'w'],
-  'w': [],
-  'x': [],
-  'y': ['z'],
-  'z': [],  
-}
-
 
 # depth first search solution using a stack(under the hood) and recursion
 def has_path(graph, src, dst): 
