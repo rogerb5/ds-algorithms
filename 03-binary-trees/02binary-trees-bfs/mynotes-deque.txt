@@ -16,21 +16,18 @@ insert(index, value): add element at specified index
 extend(list): adds a list of values to the right
 extendleft(list): adds a list of values to the left
 
-
 Deletion:
 pop(): remove an element from the right
 popleft(): remove an element from the left
 remove(value): remove a value in the first occurence
 
-
 For python we will need import the deque from collections package
 A deque is a doubly ended queue in which we can both add and remove from the 
-front and rear of the data structure respectively. Using a deque is the most
-Optimal in regards to running time.
+front and rear of the data structure respectively. Using a deque is more optimal than using a list in relation to running time.
 
 Also, it is easier to process the logic when a value leaves the queue
 Instead of when values enter a queue. Recursion will not be necessary for this problem
-because of the call stack and we would end up forcing a stack to a queue. 
+because of the default python call stack and we would end up forcing a stack to a queue. 
 
 So I need to get this result for bfs, 
 Bfs result: [a, b, c, d, e, f]
@@ -64,9 +61,8 @@ But we will also need to append c's only child f to the right-side of the deque
 deque: [d, e, f]
 
 The deque is still not empty, but d has no children
-So pop left d from the deque while it the deque is not empty and since the rest have no children
-then they can be appended to the to the tracking list.
+So pop left d from the deque.
+While the deque is not empty, keep proccessing 
+Finally, we travelled the binary tree using bfs and a deque!
 
 List: [a, b, c, d, e, f]
-
-And we travelled the binary tree using bfs and a deque!
