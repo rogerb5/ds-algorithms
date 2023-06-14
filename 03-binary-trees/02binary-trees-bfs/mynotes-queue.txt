@@ -8,23 +8,34 @@
 # d   e     f
 
 Queue: ---> back [] <-- front
-List: ----> back [] <---- front
 
-So I need to get this result for bfs, 
-Bfs result: [a, b, c, d, e, f]
+List: ----> front [] <---- list
+List indicies: [0, 1, 2, ...n]
+
+Disclaimer: I will use pop(0) because
+The front of the list the left side, and the right side is the end. But for
+The purpose the the notes a queue's front is on the right and rear is at the left.
+
+Wanted bfs result:
+[a, b, c, d, e, f]
 
 My thoughts:
-I will use a python list to act as a queue
-Which uses the (FIFO) first in first out concept
+I will use a python list to act as a queue which uses the (FIFO) first in first out concept
 
 Notes:
 A python list is an ordered collection of data objects.
-Unlike an array, which can contain object of one single type
-Lists can contain a variety of objects. Also, list do not have fixed size
-They are flexible so elements can be added and removed at any point.
+Unlike an array, which can contain object of one single type lists can contain a variety of objects. Also, lists do not have fixed size instead they are flexible so elements can be added and removed at any point.
 
-So first I need to initialize the root node to the queue
+List methods:
 
+Adding
+append(): adds an item to the end of the list
+
+Removing
+pop(index): removes an item math the end of the list
+If index is omitted then default value is -1
+
+First I need to initialize the root node to the queue
 Queue: [a]
 
 While the queue is not empty, pop the first index (front) from the list and save it to a list.
@@ -32,34 +43,30 @@ While the queue is not empty, pop the first index (front) from the list and save
 List: [a]
 Queue: back [] front
 
-Let's look at a's children. B, and c. First append b (left child) and next c (right child)
-To the queue
+Let's look at a's children. b, and c. First append b (left child) and next c (right child) to the queue
 
 List: [a]
 Queue: [c, b]
 
-Pop(0) b from the queue and add it to the list.
+Pop b from the queue and add it to the list.
 
 List: [a, b]
 Queue: [c]
 
-Now we look at b's children and they are d(left child), and e (right child).
-And append d followed by e.
+Now we look at b's children and they are d(left child), and e (right child). Append d followed by e to the queue.
 
 List: [a, b]
 Queue: [e, d, c] 
 
-Pop(0) c from the front of the queue and append it to the list
+Pop c from the queue and append it to the list
 
 List: [a, b, c]
 Queue: [e, d]
 
-Also, c only has one child so add it to the queue
-
+Also, c only has one child so append it to the queue
 Queue: [f, e, d]
 
-
-We keep going until the queue is empty, since none have no children the we keep adding 
-Until the queue is empty and all values are saved to the list.
+While the queue is not empty, keep going until the queue is empty and all children nodes
+Are evaluated.
 
 List: [a, b, c, d, e, f]
