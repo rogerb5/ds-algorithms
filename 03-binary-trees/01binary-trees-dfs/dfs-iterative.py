@@ -42,9 +42,4 @@ def depth_first_values(root):
   print(values)
   return values
             
-depth_first_values(a)    
-
-        
-
-
-    
+depth_first_values(a)
