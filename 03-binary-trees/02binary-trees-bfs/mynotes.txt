@@ -5,3 +5,55 @@
 #   b     c
 #  / \     \
 # d   e     f
+
+Queue: ---> back [] <-- front
+
+For python we will need import the dequeue from collections package
+A dequeue is a doubly ended queue we can both add and remove from the 
+Front and rear of the data structure respectively. It will behave 
+As queue for our purpose.
+
+So I need to get this result for bfs, 
+Bfs result: [a, b, c, d, e, f]
+Dfs result: [a, b, d, e, c, f]
+
+I will need to use the queue data structure (LIFO)
+First In First Out
+
+We first need to initialize the queue with the root node, and then
+Begin the main algorithm.
+
+Queue: [a]
+
+While the queue is not empty the remove the front element
+So save [a] to the values list, and look at a's children
+So add b first and next c to the queue.
+
+"The right child is added first, and lastly the left one."
+
+List: [a]
+Queue:[c, b] 
+
+Now, b will leave the queue and it will be added to the list.
+
+List: [a, b]
+Queue: [c]
+
+However, look at b's children, d and e. So first push d first then e.
+
+Queue: [e, d, c]
+
+c will now leave the front of the queue and added to the list.
+List: [a, b, c]
+
+But we will also need to add c's only child f to the back of the queue
+
+Queue: [f, e, d]
+
+Queue is still not empty, but d has no children
+So add d to the list, and the rest of the values do not have children so finish 
+Adding them to the tracking list.
+
+List: [a, b, c, d, e, f]
+
+And we travelled the binary tree using bfs
