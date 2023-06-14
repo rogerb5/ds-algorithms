@@ -1,0 +1,104 @@
+# iterative bfs approach
+
+#       a
+#    /    \
+#   b      c
+#  / \      \
+# d   e      f
+
+Since we have access to the root node we can access everything
+BFS approach, you start with your root node in the queue
+
+Queue: back ---> [] <--- front
+
+Queue: [a]
+
+However, there is a new concept we need to implement.
+
+We need to check if a equals our target e. No, so
+consider a's children. b (right child) is added first then c (left child) to the queue.
+
+Queue: [c, b]
+
+So pop b, and does b equal target e? No, so add b's children to the queue.
+
+Queue: [e, d, c]
+
+So pop c, and does c equal target e? No, so add c's children to the queue.
+
+Queue: [f, e, d]
+
+So pop d, and does d equal target e? No, but d does not have children so continue.
+
+Queue: [f, e]
+
+So pop e, and does e equal target e? Yes, so return true!
+
+Queue: [f]
+
+It looks like we only checked when e left the front of the queue,
+But not when it was added to the queue. You could have returned earlier 
+when e was added to the queue. But logically it is easier to check when something leaves the queue.
+
+# recursive dfs approach
+#        a
+#     /    \
+#    b      c
+#   / \    / \
+#  d   e  x   f
+# / \        / \
+# x x       x   x
+
+e does not have to have null nodes drawn because that's where it will return true.
+
+We can solve this problem using dfs and using a stack instead of a queue.
+However, let's try recursion!
+
+
+Let's think about the two base cases.
+Affirmative base case: when the match has been found return true
+Negatory base case: when there is a null node return false
+
+Let's focus on a sub tree.
+#   d
+#  / \
+# x   x
+
+FALSE OR FALSE => FALSE
+
+Let's look the upper sub tree.
+#           b (TRUE)
+#  	   / \
+# (FALSE) d   e (TRUE)
+
+FALSE OR TRUE => TRUE
+
+Continue with another sub tree (bottom right)
+#   f (FALSE)
+#  / \
+# x   x
+
+FALSE OR FALSE => FALSE
+
+Next upwards sub tree, 
+
+#   c (FALSE)
+#  / \
+# x   f (FALSE)
+
+FALSE OR FALSE => FALSE
+
+After all the subtrees have been evaluated we end up with
+
+#              a
+#    	    /    \
+# (TRUE)   b      c (FALSE)
+#         / \    / \
+#        d   e  x   f
+#       / \        / \
+#       x x       x   x
+
+
+TRUE OR FALSE => TRUE
+Which is indeed our correct answer and true has been bubbled up.
+
