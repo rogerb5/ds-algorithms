@@ -28,3 +28,22 @@ c.right = f
 from collections import deque
 
 def tree_sum(root):
+    if not root:
+        return []
+    queue = deque([root])
+    values = []
+    total_sum = 0
+        
+    while queue:
+        node = queue.popleft()
+        total_sum += node.val
+
+        if node.left:
+            queue.append(node.left)
+        if node.right:
+            queue.append(node.right)
+
+    print(total_sum)
+    return total_sum
+
+tree_sum(a)

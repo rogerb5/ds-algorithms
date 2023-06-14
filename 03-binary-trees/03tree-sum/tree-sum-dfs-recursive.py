@@ -24,7 +24,12 @@ c.right = f
 # 4   -2     1
 
 # should result in 21
-
+# 3 + 13 + 5 => 21
 
 # my solution recursive dfs
 def tree_sum(root):
+  if root is None:
+    return 0
+  return root.val + tree_sum(root.left) + tree_sum(root.right)
+
+tree_sum(a)

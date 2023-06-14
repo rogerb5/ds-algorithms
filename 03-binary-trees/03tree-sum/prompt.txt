@@ -56,6 +56,5 @@ f.right = h
 
 tree_sum(a) # -> 10
 
-
 Test 02:
 tree_sum(None) # -> 0

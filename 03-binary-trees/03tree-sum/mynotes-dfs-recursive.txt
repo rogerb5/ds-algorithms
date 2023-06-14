@@ -1,0 +1,82 @@
+# recursive DFS approach
+
+#       3
+#    /    \
+#   11     4
+#  / \      \
+# 4   2     1
+
+Sum should result in 25
+
+My thoughts:
+
+Dfs traversal relies on a stack and if you use recursion
+You will use the underlying call stack so you will get the similar ordering.
+
+Notice how some nodes do not have children so x represents null.
+
+#         3
+#       /   \
+#     11     4
+#    / \    / \
+#   4   2  x   1
+#  /\  /\     /\
+# x x x x   x  x
+
+
+We know that when it comes to solving problems recursively
+It's about writing a base case which is the simplest input.
+The sum of an empty (null) tree would be 0
+
+Let's target the 4 node. What is the sum of that sub tree?
+
+#  4
+# / \
+# x x 
+
+So we get 0 + 4 + 0 => 4
+
+Let's target the 2 node. What is the sum of that sub tree?
+#  2
+# / \
+# x x 
+
+So we get 0 + 2 + 0 => 2
+
+When the base cases return to the parent is when the left and right
+Children are added with the self.
+
+#            11
+#           / \
+# (4total) 4   2 (2total)
+
+4 + 11 + 2 => 17
+
+So 17 represents the total of sum of this sub tree
+
+#   11 (17total)
+#  /  \
+# 4    2
+
+Now we go to the right side of the tree
+
+#   4 (5total)
+#  / \
+# x   1
+
+0 + 4 + 1 => 5
+
+So finally at the main root 
+17 + 3 + 5 => 25
+
+#         3
+#       /   \
+#     11     4
+#    / \    / \
+#   4   2  x   1
+#  /\  /\     /\
+# x x x x   x  x
+
+
+Indeed we get 25 as the answer. We should think about the base case which is typically the null node, then figure out the parent and how it can compute it's result based on the parent.
+
