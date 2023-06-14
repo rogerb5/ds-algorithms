@@ -24,6 +24,9 @@ c.right = f
 # d   e     f
 
 # my solution using a list
+# in python pop() from a list is o(n) time since shifting occurs
+# and appending is in o(1) time
+# therefore, the total operation is costly and not optimal at o(n^2)
 def breadth_first_values(root):
     if root is None:
         return []

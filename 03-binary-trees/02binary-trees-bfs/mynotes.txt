@@ -13,6 +13,10 @@ A dequeue is a doubly ended queue we can both add and remove from the
 Front and rear of the data structure respectively. It will behave 
 As queue for our purpose.
 
+Also, it is easier to process the logic when a value leaves the queue
+Instead of when values enter a queue. Recursion will not be necessary 
+Because of the call stack and we would end up forcing a stack to a queue. 
+
 So I need to get this result for bfs, 
 Bfs result: [a, b, c, d, e, f]
 Dfs result: [a, b, d, e, c, f]
