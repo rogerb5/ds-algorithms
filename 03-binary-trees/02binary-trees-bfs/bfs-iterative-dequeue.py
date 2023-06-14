@@ -35,7 +35,6 @@ def breadth_first_values(root):
   
   while queue:
     node = queue.popleft()
-    
     values.append(node.val)
     
     if node.left:
