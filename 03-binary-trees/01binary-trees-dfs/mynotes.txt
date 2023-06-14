@@ -1,0 +1,81 @@
+# Iterative DFS approach
+
+My Initial thoughts:
+#      a
+#    /   \
+#   b     c
+#  / \     \
+# d   e     f
+
+Stack Key: bottom --> [val, val] <-- top
+In python we can use the list data structure since removing occurs at the end.
+
+My goal is I need this order [a, b, d, e, c, f]
+
+How can I achieve this?
+D.F.S. traditionally uses a stack data structure
+A stack uses the Last In First Out (LIFO) concept
+In programming this means I have to save the instance of every node.
+
+I need to start at the root node, so push it into the stack
+Stack: [a]
+
+Now, I will begin the flow of the algorithm.
+We constantly need to check while the stack is not empty.
+
+If it is not empty, the stack needs to get popped! 
+The popped value will be saved a list called values.
+
+values: [a]
+
+Look at node a's children which is b and c.
+It is important to check if children exist before they are appended to the stack!
+If the right children is not empty then append (add to the end of the values list) - the right node value
+
+If the left children is not empty then append(add to the end of the values list) - the left node value
+
+Both of them are true so -
+
+"c is pushed in first, and b is pushed afterwards."
+That is because the popping order is opposite and we are doing a DFS.
+
+Stack: [c, b]
+
+Again, now let's consider b's children because b is at the top of stack.
+b's children are d, and e. So now append both to the stack.
+
+Stack: [c, e, d]
+
+b can be appended to the values list because we already visited it's children
+
+Values: [a, b]
+
+But our stack is still not empty we still have [c, e, d]
+
+Notice how d has no children! There is nothing to add to the stack here!
+So just add d to the values list!
+Values: [a, b, d]
+
+Stack: [c, e]
+
+E has no children so add it may be added to the values list
+
+Values: [a, b, d, e]
+
+Finally we get to c, so push c to the stack
+
+Stack: [c]
+
+c only has one child so add it to the values list, and append f to the stack
+
+Values: [a, b, d, e, c]
+Stack: [f]
+
+f has no children so add to values list
+
+Values: [a, b, d, e, c, f]
+
+Once the stack is empty! We know we travelled the entire binary tree
+And we get our final result.
+
+

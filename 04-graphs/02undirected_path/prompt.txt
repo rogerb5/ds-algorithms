@@ -1,0 +1,132 @@
+Write a function, undirected_path, that takes in a list of edges for an undirected graph and two nodes (node_A, node_B). The function should return a boolean indicating whether or not there exists a path between node_A and node_B.
+
+
+My thoughts:
+
+
+Test 00
+
+edges = [
+  ('i', 'j'),
+  ('k', 'i'),
+  ('m', 'k'),
+  ('k', 'l'),
+  ('o', 'n')
+]
+
+undirected_path(edges, 'j', 'm') # -> True
+
+Test 01
+
+edges = [
+  ('i', 'j'),
+  ('k', 'i'),
+  ('m', 'k'),
+  ('k', 'l'),
+  ('o', 'n')
+]
+
+undirected_path(edges, 'm', 'j') # -> True
+
+Test 02
+
+edges = [
+  ('i', 'j'),
+  ('k', 'i'),
+  ('m', 'k'),
+  ('k', 'l'),
+  ('o', 'n')
+]
+
+undirected_path(edges, 'l', 'j') # -> True
+
+Test 03
+
+edges = [
+  ('i', 'j'),
+  ('k', 'i'),
+  ('m', 'k'),
+  ('k', 'l'),
+  ('o', 'n')
+]
+
+undirected_path(edges, 'k', 'o') # -> False
+
+Test 04
+
+edges = [
+  ('i', 'j'),
+  ('k', 'i'),
+  ('m', 'k'),
+  ('k', 'l'),
+  ('o', 'n')
+]
+
+undirected_path(edges, 'i', 'o') # -> False
+
+Test 05
+
+edges = [
+  ('b', 'a'),
+  ('c', 'a'),
+  ('b', 'c'),
+  ('q', 'r'),
+  ('q', 's'),
+  ('q', 'u'),
+  ('q', 't'),
+]
+
+
+undirected_path(edges, 'a', 'b') # -> True
+
+Test 06
+
+edges = [
+  ('b', 'a'),
+  ('c', 'a'),
+  ('b', 'c'),
+  ('q', 'r'),
+  ('q', 's'),
+  ('q', 'u'),
+  ('q', 't'),
+]
+
+undirected_path(edges, 'a', 'c') # -> True
+
+Test 07
+
+edges = [
+  ('b', 'a'),
+  ('c', 'a'),
+  ('b', 'c'),
+  ('q', 'r'),
+  ('q', 's'),
+  ('q', 'u'),
+  ('q', 't'),
+]
+
+undirected_path(edges, 'r', 't') # -> True
+
+Test 08
+
+edges = [
+  ('b', 'a'),
+  ('c', 'a'),
+  ('b', 'c'),
+  ('q', 'r'),
+  ('q', 's'),
+  ('q', 'u'),
+  ('q', 't'),
+]
+
+undirected_path(edges, 'r', 'b') # -> False
+
+Test 09
+
+edges = [
+  ('s', 'r'),
+  ('t', 'q'),
+  ('q', 'r'),
+]
+
+undirected_path(edges, 'r', 't') # -> True
