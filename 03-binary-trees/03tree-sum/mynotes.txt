@@ -1,0 +1,11 @@
+# Iterative BFS approach
+
+#       3
+#    /    \
+#   11     4
+#  / \      \
+# 4   -2     1
+
+should result in 21
+
+My thoughts:
