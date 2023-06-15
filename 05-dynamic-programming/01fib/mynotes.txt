@@ -1,0 +1,227 @@
+# 06/15/2023 Notes
+
+# Fibonacci: is sequence of a unlimited length
+# We want to return the number at a certain index in the sequence.
+
+01 => 1
+11 => 2
+12 => 3
+35 => 13
+
+# 0 1 1 2 3 5 8 13 21 ...
+
+The numbers listed are the elements of the sequence
+
+    n   0 1 2 3 4 5 6  7  8
+fib(n): 0 1 1 2 3 5 8 13 21 ...
+
+"The 7th Fibonacci number is 13"
+
+
+How can we approach this? Let's try recursively, although it can be solved iteratively.
+
+fib(6) => 8
+fib(6) = fib(5) + fib(4)
+
+We need to break it down to fib(5), fib(4), fibs below fib(6)
+
+In general we can say:
+
+fib(n) = fib(n-1) + fib(n-2) so fib(5) is
+
+fib(5) = fib(4) + fib(3)
+
+
+#		          6
+#		      /      \					
+#		    5         4	
+#		   / \	     / \	
+#		  4   3     3   2
+#		 /\   /\    /\  /\
+#		3 2   2  1  2 1 1 0
+#	       /\ /\  /\    /\	
+#	      2 1 1 0 1 0  1  0 	
+#	     /\
+#	    1  0	
+
+Let's focus when the input is 0, for all those zero nodes they
+Ought to return 0. Which means the tree cannot further expand.
+Ultimately 0 becomes a base case.
+
+fib(0) => 0
+
+For every 0 let's add a zero to all the sub trees which contain zero
+
+#	2
+#  (1) / \ (0)	
+#     1   0
+
+For every 1 let's add a one to all sub trees which contain one.
+As shown above. 1 will also become a base case.
+
+
+Let's look at this node of 2 bottom left at the first half right bottom sub tree
+#	2 (1)
+#      / \ 	
+# (1) 1   0 (0)
+
+1 + 0 = 1, fib(2) => 1
+
+Let's look the upward tree.
+#	3 (2)
+#      / \
+#(1)  2   1  
+#    /\
+#   1  0
+
+(1) + 1 => 2, fib(3) => 2.
+We are checking how our recursive code is returning back to our parent, our root node.
+
+Let's combine the other subtree
+#	4 (3)
+#      / \
+#(2)  3   2 (1) 
+#    /\   /\
+#   2  1  1 0
+#  /\
+# 1  0
+
+2 + 1 => 3, and fib(4) => 3
+
+
+Now, let's keep tracing to our first half right side subtree
+
+#	2 (1)
+#      / \	
+#     1   0
+
+1 + 0 => 1, fib(2) => 1
+
+Continue on:
+#
+#	  3 (2)	
+#	 / \	
+#  (1)	2   1
+#      / \
+#     1   0
+
+(1) + 1 => 2, fib(3) => 2
+
+Eventually we end up with:
+
+#		          6(8)
+#		      /         \					
+#		    5            4	
+#		   / \	         / \	
+#	    (3)	  4   3 (2) (2) 3   2 (1)
+#		 /\   /\        /\  /\
+#		3 2   2  1      2 1 1 0
+#	       /\ /\  /\       /\	
+#	      2 1 1 0 1 0     1 0 	
+#	     /\
+#	    1  0	
+
+
+Then we have 3 + 2 => 5, fib(5) => 5
+And we have 2 + 1 => 3. fib(4) => 3
+
+So we can do 5 + 3 => 8, fib(6) => 8
+
+Every node of this represents a recursive call, and the tree is asymmetric
+Since the left side of the tree goes deeper.
+
+So o(2^n) which is exponential and not optimal. There is a better way to solve this!
+
+What patterns do you recognize?
+
+#		          6
+#		      /      \					
+#		    5          4	
+#		   / \	      / \	
+#		  4   3      3   2
+#		 /\   /\     /\  /\
+#		3 2   2  1  2 1 1 0
+#	       /\ /\  /\    /\	
+#	      2 1 1 0 1 0  1  0 	
+#	     /\
+#	    1  0
+
+Every node represents a problem, and there are duplicate problems.
+
+The right side subtree rooted in 4 represents a sub problem, furthermore
+Left side sub tree rooted in 4 is the same problem twice since both trees are identical which is the fib(4)!
+
+If you root yourself at 3.
+There are 3 identical subtrees so we need to solve this problem 3 times which in turn fib(3) is a sub problem of fib(4).
+
+
+#		              6
+#		      /              \					
+#		    5                 4 fib(4)	
+#		   / \	             / \	
+# fib(4)	  4   3fib(3) fib(3) 3   2
+#		 /\   /\             /\  /\
+# fib(3)	3 2   2  1           2 1 1 0
+#	       /\ /\  /\             /\	
+#	      2 1 1 0 1 0           1  0 	
+#	     /\
+#	    1  0
+
+And there other duplicate problems such as fib(2)
+If we store some sub results we can forego having to calculate the same problems. Let's prune out the tree.
+
+#		        6
+#		      /  \					
+#		    5     4	
+#		   / \	      	
+#		  4   3      
+#		 /\       
+#		3  2     
+#	       /\       
+#	      2 1    	
+#	     /\
+#	    1  0
+
+
+
+At this point there are not any duplicate sub trees. This represents all the recursive calls we will have to make! Let's use memoization, and our memo can be a data structure such as a hash, object, or dictionary data structure. Choose a data structure that has a look up of o(1) time.
+
+
+fib(6) => 8
+
+#		        6 (8)
+#		      /  \					
+# (5)		    5     4 (3*)	
+#		   / \	      	
+# (3)		  4   3 (2*)     
+#		 /\       
+# (2)		3  2 (1*)    
+#	       /\       
+# (1)	      2 1 (1)   	
+#	     /\
+#	    1  0
+
+*Notice how have calculated fib(2) => 1 previously, 
+Without having to recursive or build the subtree we can just fetch the stored value in the memo. "the second fib returns one"!
+
+MEM0 TRACKER:
+2: 1
+3: 2
+4: 3
+5: 5 
+
+What is the run time now? The tree looks trimmed because of memoization. The tree is also obeying the general fib(n) = fib(n-1) + fib(n-2) rule. Every time we increase our input by 1 I only add two node! Our problem scales linearly.
+
+Time is O(n) and space O(n) -> height of the tree for space
+
+It might be easy to modify a brute force solution to a memoized solution.
+However, avoid writing preemptive logic where you try to memoize your child calls
+If you picture this as a tree the parent is fib(n) and children are fib(n-1) and fib(n-2)
+We do not want to write memoization logic explicitly about the child calls.
+
+memo[n-1] = _fib(n-1, memo)
+memo[n-2] = _fib(n-2, memo)
+
+Instead, write logic for yourself because every call will store itself in the memo. And you avoid duplication.
+
+memo[n] = _fib(n - 1, memo) + _fib(n - 2, memo)
