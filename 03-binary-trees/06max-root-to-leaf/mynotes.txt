@@ -1,0 +1,93 @@
+DFS recursive iteration
+
+#      5
+#    /   \
+#   11    3
+#  / \     \
+# 4   2     1
+
+
+Notes:
+5 is the single root, also there are 3 leafs in this tree.
+Leafs have no children. We should consider the three paths terminating at a leaf.
+
+1st path:
+#     5
+#    /
+#   11
+#  /
+# 4
+
+5 + 11 + 4 = 20
+
+2nd path:
+#  5
+#   \
+#    11
+#   /
+#  2
+
+5 + 11 + 2 = 18
+
+3rd path:
+#   5
+#    \
+#     3
+#      \
+#       1   
+
+5 + 3 + 1 = 9
+
+We want to choose the max path sum which is 20!
+Let's think of some prior problems such as treesum, and min value problem
+So we can combine some knowledge from both solutions.
+
+A recursive code is the best bet for path finding building or determining.
+The leaf node will be a base case, and leaf have no children.
+
+Base case:
+Think of just a tree with one node such as 42
+42 is the only leaf and it is also the root! The max path sum is 42.
+
+Base case: for a null node 
+It should be set to -infinity
+
+Base cases can be found as we program the logic.
+
+
+#      11              (4) 11        (15) 11
+#      / \                /  \ 		 /  \ 
+# (4) 4   2 (2)          4    2 	4    2
+
+Compare 4 and 2 
+And choose the bigger one
+
+4 should be added with the current value which happens to be 11
+And we get 15 for this sub tree. 15 represents this path:
+
+#   11
+#  / 
+# 4
+
+
+Let's look at the other tree
+
+#          3	       3 (4)
+#         / \         / \
+# (-INF) x   1 (1)   x   1
+
+Compare -inf and 1, so 1 is bigger.
+1 is added to the current value 3. 3 + 1 = 4
+
+We end up with and we end up at the root:
+
+#         5
+#    	/   \
+# (15) 11    3 (4)
+#     / \     \
+#    4   2     1
+
+15 should be added with the current value which is the root.
+15 + 5 = 20
+
+And 20 represents the 5 + 11 + 4 path
