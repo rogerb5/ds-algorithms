@@ -1,0 +1,65 @@
+
+# DFS recursively 
+
+#       5
+#    /    \
+#   11     3
+#  / \      \
+# 4   15     12
+
+We need to find the smallest value in the tree. In this case it's 3.
+
+#        5
+#     /     \
+#    11      3
+#   / \     / \
+#  4   15   x 12
+# / \  / \    / \
+#x   x x x   x   x  
+
+We need a base case for our null nodes
+We should return infinity because we know positive infinity is not the minimum
+
+#        4 (4)
+#       / \
+# (INF)x   x (INF)
+
+What's smaller INF,INF, or 4? So 4 should be returned
+
+Another tree:
+#        15 (15)
+#       / \
+# (INF)x   x (INF)
+
+Upward tree:
+
+#	  11  (4)
+#        / \	
+#   (4) 4   15 (15)
+
+Compare left subtree value 4, right subtree value, and self which is 11.
+4 should be returned
+
+Bottom right tree:
+
+#	  12 (12)
+#        /  \
+# (INF) x    x (INF)
+
+Upward tree:
+#	  3 (3)
+#        /  \
+# (INF) x    12 (12)
+
+After processing sub trees we get
+
+#        5
+#     /     \
+#(4) 11      3 (3)
+#   / \     / \
+#  4   15   x 12
+# / \  / \    / \
+#x   x x x   x   x  
+
+So we compare 4, 5, 3 and the answer is 3.
+
