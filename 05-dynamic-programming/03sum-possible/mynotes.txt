@@ -1,0 +1,144 @@
+# 06/15/2023
+
+Sum possible
+
+The problem will take two arguments
+
+Amount = 5, numbers = [1, 2, 3] 
+
+Return true or value whether some values of the array 
+Can be summed up to equal the amount. In this case
+We can return true
+
+2 + 3
+3 + 1 + 1
+2 + 1 + 2
+1 + 1 + 1 + 1 + 1
+
+But we have at least one way so we can return true
+
+Amount = 15, numbers = [6, 4, 10]
+Is false since you cannot get 15 with any of those numbers added.
+
+
+E.G. 
+
+Amount = 4
+Numbers = [1, 2, 3]
+
+#			4
+#		    1/ 2| \3 	
+#		    3	2  1 
+
+The node values are the amounts were are trying to break down.
+The values next to the edges are some numbers that we arbitrarily choose from our list.
+
+#			 4
+#		     1/ 2| \3 	
+#		     3	 2   1 
+#		  1/2|\3
+#		  2  1 0
+#
+
+The upmost subtree's 2 node value is important to look out for because we can only use some of our numbers for valid moves. In other words, we can do 2 - 1 = 0, or 2 - 2 = 0. We should not do 2 - 3 even though we have the option to chose it from our list. That would bring us to a negative number.
+
+#			    4
+#		     1/    2|  \3 	
+#		     3	    2    1 
+#		  1/2|\3   1/\2	 |1
+#		  2  1 0   1  0  0
+
+Let's continue this pattern until we cannot break the nodes any further. This problem is basically being torn apart recursively and do not have build a tree data structure. The tree is used to understand the options that we can take
+
+#			    4
+#		      1/    2|  \3 	
+#		      3	     2    1 
+#		   1/ 2|3\  1/\2  |1
+#		   2  1  0  1  0  0
+#		 1/\2 1|   1|  	
+#		 1| 0  0    0
+#		  0
+
+The base case:
+  If amount == 0, then return true  
+  Because we can always generate 0 by not choosing numbers from the list
+  Or by not having no numbers available.
+
+This path 
+#	 4 
+#      1/	   
+#      	3
+#	|2
+#	1
+#	|1
+#	0 (true since zero always return true!)
+
+
+1 + 2 + 1 = 4 adding the numbers along the edges
+How do the values return? Given a parent node if it receives a true from any of its children then it's also true. Trues will bubble up.
+
+#			    4 (t)
+#		      1/    2|  \3 	
+#(t)		      3	(t)  2    1 (t)
+#		   1/ 2|\3  1/\2  |1
+#		   2  1  0  1  0  0
+#		 1/\2 1|   1|  	
+#		 1| 0  0    0
+#		  0
+
+
+Brute force complexity
+A = amount
+N = length of numbers
+Time O(n^a) 
+Space O(a) based on height of the tree
+
+Let's do better and notice duplicate subtrees. For example, rooted in 2 and 1.
+That means we are trying to solve duplicate problems. We should memorize those answers to fetch them previously.
+
+Untrimmed tree
+#			    4
+#		      1/    2|  \3 	
+#		      3	     2    1 
+#		   1/ 2|\3  1/\2  |1
+#		   2  1  0  1  0  0
+#		 1/\2 1|   1|  	
+#		 1| 0  0    0
+#		  0
+
+Trimmed tree
+
+#			   4(t)
+#		      1/  2|  \3 	
+#		      3	   2   1 
+#		   1/ 2|3\    
+#		   2  1   0  
+#		 1/\2    	
+#		 1| 0  
+#		  0
+
+Memoized complexity
+A = amount
+N = length of numbers (width)
+
+Time: O(a*n)
+Space: O(a)
+
+A false scenerio
+Amount = 15, numbers = [4, 6, 10]
+
+
+#			    15(f)
+#		      4/    6|  \10 	
+#		      11     9    5 
+#		   4/   \6  4/\6  |4
+#		   7     5  5  3  1
+#		 4/\6   4| 4|  	
+#		 3  1    1  1
+
+Node bottom most nodes cannot be broken further because we end up with - values.		  
+That means those quantity cannot be used so therefore false would be bubbled up but remember
+A parent will only return true if only one child returns true.
+
+So that should be another base case!
+
