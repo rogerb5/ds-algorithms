@@ -15,10 +15,8 @@ The numbers listed are the elements of the sequence
     n   0 1 2 3 4 5 6  7  8
 fib(n): 0 1 1 2 3 5 8 13 21 ...
 
-"The 7th Fibonacci number is 13"
-
-
-How can we approach this? Let's try recursively, although it can be solved iteratively.
+How can we approach this? 
+Let's try recursively, although it can be solved iteratively.
 
 fib(6) => 8
 fib(6) = fib(5) + fib(4)
@@ -57,7 +55,6 @@ For every 0 let's add a zero to all the sub trees which contain zero
 For every 1 let's add a one to all sub trees which contain one.
 As shown above. 1 will also become a base case.
 
-
 Let's look at this node of 2 bottom left at the first half right bottom sub tree
 #	2 (1)
 #      / \ 	
@@ -85,7 +82,6 @@ Let's combine the other subtree
 # 1  0
 
 2 + 1 => 3, and fib(4) => 3
-
 
 Now, let's keep tracing the first half right side subtree
 
@@ -210,7 +206,7 @@ fib(6) => 8
 
 *Notice how have calculated fib(2) => 1 previously, 
 Without having to recursively build the subtree 
-we can just fetch the stored value in the memo. "the second fib returns one"!
+we can just fetch the stored value in the memo.
 
 fib(2) => 1
 fib(3) => 2
