@@ -1,0 +1,107 @@
+Write a function, count_paths, that takes in a grid as an argument. 
+In the grid, 'X' represents walls and 'O' represents open spaces. 
+You may only move down or to the right and cannot pass through walls. 
+The function should return the number of ways possible 
+to travel from the top-left corner of the grid to the bottom-right corner.
+
+Test 00:
+grid = [
+  ["O", "O"],
+  ["O", "O"],
+]
+count_paths(grid) # -> 2
+
+Test 01:
+grid = [
+  ["O", "O", "X"],
+  ["O", "O", "O"],
+  ["O", "O", "O"],
+]
+count_paths(grid) # -> 5
+
+Test 02:
+grid = [
+  ["O", "O", "O"],
+  ["O", "O", "X"],
+  ["O", "O", "O"],
+]
+count_paths(grid) # -> 3
+
+Test 03:
+grid = [
+  ["O", "O", "O"],
+  ["O", "X", "X"],
+  ["O", "O", "O"],
+]
+count_paths(grid) # -> 1
+
+
+Test 04:
+grid = [
+  ["O", "O", "X", "O", "O", "O"],
+  ["O", "O", "X", "O", "O", "O"],
+  ["X", "O", "X", "O", "O", "O"],
+  ["X", "X", "X", "O", "O", "O"],
+  ["O", "O", "O", "O", "O", "O"],
+]
+count_paths(grid) # -> 0
+
+Test 05:
+grid = [
+  ["O", "O", "X", "O", "O", "O"],
+  ["O", "O", "O", "O", "O", "X"],
+  ["X", "O", "O", "O", "O", "O"],
+  ["X", "X", "X", "O", "O", "O"],
+  ["O", "O", "O", "O", "O", "O"],
+]
+count_paths(grid) # -> 42
+
+Test 06:
+grid = [
+  ["O", "O", "X", "O", "O", "O"],
+  ["O", "O", "O", "O", "O", "X"],
+  ["X", "O", "O", "O", "O", "O"],
+  ["X", "X", "X", "O", "O", "O"],
+  ["O", "O", "O", "O", "O", "X"],
+]
+count_paths(grid) # -> 0
+
+Test 07:
+grid = [
+  ["O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O"],
+  ["O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O"],
+  ["O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O"],
+  ["O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O"],
+  ["O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O"],
+  ["O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O"],
+  ["O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O"],
+  ["O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O"],
+  ["O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O"],
+  ["O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O"],
+  ["O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O"],
+  ["O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O"],
+  ["O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O"],
+  ["O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O"],
+  ["O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O"],
+]
+count_paths(grid) # -> 40116600
+
+Test 08:
+grid = [
+  ["O", "O", "X", "X", "O", "O", "O", "X", "O", "O", "O", "O", "O", "O", "O"],
+  ["O", "O", "X", "X", "O", "O", "O", "X", "O", "O", "O", "O", "O", "O", "O"],
+  ["O", "O", "O", "X", "O", "O", "O", "X", "O", "O", "O", "O", "O", "O", "O"],
+  ["X", "O", "O", "O", "O", "O", "O", "X", "O", "O", "O", "O", "O", "O", "O"],
+  ["X", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O"],
+  ["O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "X", "X", "O"],
+  ["O", "O", "O", "O", "O", "O", "O", "X", "O", "O", "O", "O", "O", "X", "O"],
+  ["O", "O", "O", "O", "O", "O", "O", "O", "X", "O", "O", "O", "O", "O", "O"],
+  ["X", "X", "X", "O", "O", "O", "O", "O", "O", "X", "O", "O", "O", "O", "O"],
+  ["O", "O", "O", "O", "X", "X", "O", "O", "O", "O", "X", "O", "O", "O", "O"],
+  ["O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O"],
+  ["O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O"],
+  ["O", "O", "O", "O", "X", "X", "O", "O", "O", "O", "O", "O", "O", "O", "O"],
+  ["O", "O", "O", "O", "O", "O", "O", "O", "X", "O", "O", "O", "O", "O", "O"],
+  ["O", "O", "O", "O", "O", "O", "O", "O", "X", "O", "O", "O", "O", "O", "O"],
+]
+count_paths(grid) # -> 3190434

@@ -1,0 +1,190 @@
+# 06/16/2023
+# Count Paths: Dynamic Programming
+
+
+We will be given a grid in which we want
+To travel from the top left to the bottom right.
+We want to record the amount of ways possible to traverse
+The grid. The caveat is that we can only move right or down
+
+ 
+[x][ ][ ]
+[ ][ ][x]
+
+1) r, r, d
+2) r, d, r
+3) d, r, r
+
+There are 3 possible ways. However some positions will
+be covered in walls and we cannot travel through them.
+
+ x
+[ ][ ][|]
+[ ][ ][ ]x
+
+1) r, d, r
+2) d, r, r
+
+Let's look at 3 X 3
+Key: x is for the person
+
+	  0  1  2 
+	0[x][ ][|]
+	1[ ][ ][ ]
+	2[ ][ ][ ]
+
+And let's visualize it as a tree if we start at (0,0) the root
+If we move downward we would get (1,0) or if we moved to the right
+We would get (0,1)
+
+So in this case let's say we moved to the right by one
+
+#	  0  1  2 
+#	0[ ][x][|]
+#	1[ ][ ][ ]
+#	2[ ][ ][ ]
+
+
+#		0,0
+#	      /	   \ 
+#	     1,0   0,1x
+
+
+The entire tree would look like this for
+
+#	  0  1  2 
+#	0[ ][ ][|]
+#	1[ ][ ][ ]
+#	2[ ][ ][ ]
+
+#		  0,0
+#	      /	       \ 
+#	     1,0       0,1
+#	    /  \        |
+#	  2,0  1,1     1,1
+#	  |	/\      /\  	
+#	 2,1  2,1 1,2 2,1 1,2	
+#	  |    |   |   |  | 
+#	 2,2  2,2 2,2 2,2 2,2	
+#
+
+By starting at the root and we travel to a leaf node
+That represents one of the path we can take
+
+Key: # is for the path taken
+
+E.G. 
+
+#	  0  1  2 
+#	0[#][#][|]
+#	1[ ][#][ ]
+#	2[ ][ ][#]
+
+Tree representation of the path taken
+
+#	0,0
+#	  \
+#	  0,1
+#	   |
+#	  1,1
+# 	  /
+#	2,1
+#	 |
+#	2,2
+
+How can we code a base case? Visualizing trees can help us
+Implement recursion. Our goal is to reach (2,2)
+So that should be its own input!
+
+How many ways can you get from the bottom right position
+To the bottom right position. It is only 1 since we are 
+Already there.
+
+#	  0  1  2 
+#	0[ ][ ][|]
+#	1[ ][ ][ ]
+#	2[ ][ ][x]
+
+
+Bubble up the ones: the (1) is present for all (2,2) nodes
+
+#		  0,0
+#	      /	       \ 
+#	     1,0       0,1
+#	    /  \        |
+#	  2,0  1,1(2)  1,1(2)
+#	  |	/\      /\  	
+#	 2,1  2,1 1,2 2,1 1,2	
+#	  |    |   |   |  | 
+#(1)	 2,2  2,2 2,2 2,2 2,2	
+
+
+We need to stop at 1,1 because we will be bubbling up two 1's
+So at (1,1) do 1 + 1 => 2
+
+This is saying there are twos ways of getting to the position
+(2,2)- bottom right corner from (1,1)
+
+One way:
+#	  0  1  2 
+#	0[ ][ ][|]
+#	1[ ][#][ ]
+#	2[ ][#][#]
+
+The other way:
+#	  0  1  2 
+#	0[ ][ ][|]
+#	1[ ][#][#]
+#	2[ ][ ][#]
+
+
+
+So let's keep bubbling up and adding paths.
+
+#		  0,0(3+2)
+#	      /	       \ 
+#	     1,0(1+2)    0,1(2)
+#	    /  \        |
+#    (1)2,0  1,1(2)  1,1(2)
+#	  |	/\      /\  	
+#	 2,1  2,1 1,2 2,1 1,2	
+#	  |    |   |   |  | 
+#	 2,2  2,2 2,2 2,2 2,2	
+
+
+There are 5 ways of traveling from the top left to the bottom
+Right!
+
+Brute force recursion. It's too slow!
+Time O(2^(r+c))
+
+We need to move through all rows and columns thats why its r+c
+
+Okay let's improve it using dynamic programming. 
+Let's memoize duplicate function calls and prune the tree
+If our grid would to grow then there would be more overlapping 
+Of sub problem so memoization works for this.
+
+Pruned tree:
+
+#		0,0(5)
+#	      /	    \ 
+#	     1,0    0,1
+#	    /  \      |
+#    	  2,0  1,1   1,1
+#	  |	/\       	
+#	 2,1  2,1 1,2
+#	  |        |   
+#	 2,2      2,2 
+
+
+Dynamic programming w/memoization
+Time O(r * c)
+
+Once a row and column are memoize we will not need to compute it again.
+
+
+
+
+
+
