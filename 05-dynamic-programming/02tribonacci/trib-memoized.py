@@ -1,3 +1,5 @@
+
+# correct solution using memoization
 def tribonacci(n):
   return _tribonacci(n, {})
 # Our dictonary has keys that represent arguments to our recursive function
@@ -17,6 +19,6 @@ def _tribonacci(n, memo):
   # we will key into the memo using n!
   memo[n] = _tribonacci(n - 1, memo) + _tribonacci(n - 2, memo) + _tribonacci(n - 3, memo)
   print(memo[n])
-  return memo[n] #
+  return memo[n] 
 
 tribonacci(14)
