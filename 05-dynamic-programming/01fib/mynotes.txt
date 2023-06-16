@@ -23,8 +23,6 @@ How can we approach this? Let's try recursively, although it can be solved itera
 fib(6) => 8
 fib(6) = fib(5) + fib(4)
 
-We need to break it down to fib(5), fib(4), fibs below fib(6)
-
 In general we can say:
 
 fib(n) = fib(n-1) + fib(n-2) so fib(5) is
@@ -45,7 +43,7 @@ fib(5) = fib(4) + fib(3)
 #	    1  0	
 
 Let's focus when the input is 0, for all those zero nodes they
-Ought to return 0. Which means the tree cannot further expand.
+ought to return 0. Which means the tree cannot further expand.
 Ultimately 0 becomes a base case.
 
 fib(0) => 0
@@ -75,7 +73,7 @@ Let's look the upward tree.
 #   1  0
 
 (1) + 1 => 2, fib(3) => 2.
-We are checking how our recursive code is returning back to our parent, our root node.
+We are checking how our recursive code is returning back to our parent root node.
 
 Let's combine the other subtree
 #	4 (3)
@@ -89,7 +87,7 @@ Let's combine the other subtree
 2 + 1 => 3, and fib(4) => 3
 
 
-Now, let's keep tracing to our first half right side subtree
+Now, let's keep tracing the first half right side subtree
 
 #	2 (1)
 #      / \	
@@ -111,9 +109,9 @@ Eventually we end up with:
 
 #		          6(8)
 #		      /         \					
-#		    5            4	
+#		    5(5)          4(3)	
 #		   / \	         / \	
-#	    (3)	  4   3 (2) (2) 3   2 (1)
+#	       (3)4   3 (2)  (2)3   2(1)
 #		 /\   /\        /\  /\
 #		3 2   2  1      2 1 1 0
 #	       /\ /\  /\       /\	
@@ -125,12 +123,11 @@ Eventually we end up with:
 Then we have 3 + 2 => 5, fib(5) => 5
 And we have 2 + 1 => 3. fib(4) => 3
 
-So we can do 5 + 3 => 8, fib(6) => 8
+Finally, we can do 5 + 3 => 8, fib(6) => 8
 
-Every node of this represents a recursive call, and the tree is asymmetric
-Since the left side of the tree goes deeper.
-
-So o(2^n) which is exponential and not optimal. There is a better way to solve this!
+The run time ends up as o(2^n) 
+which is exponential and not optimal. 
+There is a better way to solve this!
 
 What patterns do you recognize?
 
@@ -147,28 +144,32 @@ What patterns do you recognize?
 #	    1  0
 
 Every node represents a problem, and there are duplicate problems.
-
 The right side subtree rooted in 4 represents a sub problem, furthermore
-Left side sub tree rooted in 4 is the same problem twice since both trees are identical which is the fib(4)!
+left side sub tree rooted in 4 is the same problem twice 
+since both trees are identical which is the fib(4)!
 
-If you root yourself at 3.
-There are 3 identical subtrees so we need to solve this problem 3 times which in turn fib(3) is a sub problem of fib(4).
+If you root yourself at node 3 there are 3 identical subtrees 
+so we need to solve this problem 3 times. That said, 
+fib(3) is also sub problem from fib(4).
 
+Labeling the overlapping calls and duplicate trees:
 
 #		              6
 #		      /              \					
 #		    5                 4 fib(4)	
 #		   / \	             / \	
-# fib(4)	  4   3fib(3) fib(3) 3   2
-#		 /\   /\             /\  /\
-# fib(3)	3 2   2  1           2 1 1 0
-#	       /\ /\  /\             /\	
-#	      2 1 1 0 1 0           1  0 	
+#	    fib(4)4   3fib(3) fib(3)3   2
+#		 /\   /\            /\  /\
+#         fib(3)3 2   2 1          2 1 1 0
+#	       /\ /\  /\           /\	
+#	      2 1 1 0 1 0         1  0 	
 #	     /\
 #	    1  0
 
-And there other duplicate problems such as fib(2)
-If we store some sub results we can forego having to calculate the same problems. Let's prune out the tree.
+And there other duplicate problems such as fib(2) => 1
+If we store some sub results 
+we can forego having to calculate the same problems. 
+Let's prune out the tree.
 
 #		        6
 #		      /  \					
@@ -184,25 +185,37 @@ If we store some sub results we can forego having to calculate the same problems
 
 
 
-At this point there are not any duplicate sub trees. This represents all the recursive calls we will have to make! Let's use memoization, and our memo can be a data structure such as a hash, object, or dictionary data structure. Choose a data structure that has a look up of o(1) time.
+At this point there are no duplicate sub trees. 
+This represents all the recursive calls we will have to make! 
+Let's use memoization, 
+and our memo can be a data structure 
+such as a hash, object, or dictionary data structure. 
+Choose a data structure that has a look up of o(1) time.
 
 
+Pruned tree using memoization
 fib(6) => 8
 
 #		        6 (8)
 #		      /  \					
-# (5)		    5     4 (3*)	
+# (5)		    5     4 (3*)!	
 #		   / \	      	
-# (3)		  4   3 (2*)     
+# (3*)!		  4   3 (2*)o     
 #		 /\       
-# (2)		3  2 (1*)    
+# (2*)o		3  2 (1*)x    
 #	       /\       
-# (1)	      2 1 (1)   	
+# (1*)x	      2 1 (1)   	
 #	     /\
 #	    1  0
 
 *Notice how have calculated fib(2) => 1 previously, 
-Without having to recursive or build the subtree we can just fetch the stored value in the memo. "the second fib returns one"!
+Without having to recursively build the subtree 
+we can just fetch the stored value in the memo. "the second fib returns one"!
+
+fib(2) => 1
+fib(3) => 2
+fib(4) => 3
+fib(5) => 5
 
 MEM0 TRACKER:
 2: 1
@@ -210,7 +223,10 @@ MEM0 TRACKER:
 4: 3
 5: 5 
 
-What is the run time now? The tree looks trimmed because of memoization. The tree is also obeying the general fib(n) = fib(n-1) + fib(n-2) rule. Every time we increase our input by 1 I only add two node! Our problem scales linearly.
+What is the run time now? The tree looks trimmed because of memoization. 
+The tree is also obeying the general fib(n) = fib(n-1) + fib(n-2) rule. 
+Every time we increase our input by 1 I only add two nodes! 
+Our problem scales linearly.
 
 Time is O(n) and space O(n) -> height of the tree for space
 
