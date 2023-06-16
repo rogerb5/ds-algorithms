@@ -1,8 +1,8 @@
-# 9/15/2023
+# 06/15/2023
 
 Min change
 We want to return the minimum coins available to create a
-An amount.
+an amount.
 
 amount = 5, coins = [1, 2, 3]
 
@@ -11,7 +11,8 @@ amount = 5, coins = [1, 2, 3]
 1 + 1 + 3
 2 + 3
 
-2 + 3 this would only use two coins and the program should return 4.
+2 + 3 = 5, and the program should return 2.
+2 represents the minimum coins possible.
 
 E.G.
 
@@ -57,12 +58,12 @@ Bubbling up a sub tree:
 #     |		       |	
 #     0(0)	       0
 
-So we receive a 0 from the child call, and add one in this case
+We receive a 0 from the child call and we need to add 1,
 By adding one we count the edge from the root the child. 
 Counting the number coins is we are counting the number of edges to a path
 
-So now we compare the smallest of (1) and (0) which is (0) but increment
-It by one to count the edge between the nodes. The one represents
+So now we compare the smallest of (1) and (0) which is (0) but increase
+zero by one to count the edge between the nodes. The one represents
 The shortest way of making two cents which represents the path as well!
 
 #	2(1)
@@ -72,7 +73,7 @@ The shortest way of making two cents which represents the path as well!
 
 Let's continue with bubbling:
 In this case 0 bubbles up to 1. 1 is added
-To zero to represent the distance taken.
+to zero to represent the distance taken.
 	
 #	
 #	3		 3(0+1)
@@ -100,45 +101,63 @@ Eventually we would end up with
 
 #
 #		       4(1+1)	
-#		   /   |   \  	
-#		  /    2(1) 1(1)
-#	      (1)3     /\   |	
-#	       / | \   1 0  0	
-#	      2	 1  0  |	
-#	     /\	 |     0	  
+#			  |   \  	
+#		  /    	2(1) 1(1)
+#	        3(1)    /\   |	
+#	       / | \   	1 0   0	
+#	      2	 1  0  	|	
+#	     /\	 |     	0	  
 #	    1  0 0 
 #	    |	
 #	    0
 
-Choose the smallest of the 3 1's technically it's one
-And then increment it by one to show you travelled from a child node.
-The two, represents paths that can only take two coins.
+Choose the smallest of the three 1's technically.
+And then add one to show you travelled from a child node.
+The two, represents paths that use two coins (or two edges).
 
-#		4
-#		/
+In the figure below the numbers next to the edges
+Represent our initial break down of the problem
+That will aid us in understanding how to get the initial
+Sum. What we really care is about the (1) that gets bubbled from
+3 ways. Up to the root and then increased by 1. This will show
+Us that 2 is the minimal coins needed to make 4.
+
+Path 1 (1+3):
+#		4(2)
+#		/1
 #	       3
-#		\	
+#		\3	
 #		 0
 
-#		4
-#		|
+Path2 (2+2):
+#		4(2)
+#		|2
 #		2
-#		 \
+#		 \2
 #		  0
 
-#	        4
-#		 \
+Path3 (3+1):
+#	        4(2)
+#		 \3
 #		  1
-#		  |
+#		  |1
 #		  0
 
 
 As we evaluated this tree when we received multiple sub solutions
-We always choose the smallest among them. So we need to min value logic.
+We always choose the smallest distance travelled.
+So we need to min value logic. We are figuring out the
+Minimum amount of coins possible that sums up to the initial amount.
+Not what two coins add to the amount! For example, that could be
+
+3 + 1
+1 + 3
+2 + 2
+
+In which the program would return two.
 
 Time: O(c^a)
 Space: O(a)
-
 
 Let's memoize and trim the tree by eliminating duplicates!
 
