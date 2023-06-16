@@ -1,0 +1,116 @@
+# 06/16/13
+# max path sum
+
+Based of a grid
+We start at the top right corner 
+But want to end up in the bottom right with a max path
+We may only move downward and to the right.
+
+
+[1][3][12]
+[5][6][2]
+
+One path:
+1 + 5 + 6 + 2 => 14
+
+Another path:
+1 + 3 + 6 + 2 = 12
+
+Final path:
+1 + 3 + 12 + 2 = 18
+
+We would choose 18 as the max path sum
+
+
+Let's visualize it:
+
+#     0  1  2
+#   0[1][3][12]
+#   1[5][6][2]
+
+
+As a tree as well
+
+#		0,0
+#	       /   \
+#	     1,0   0,1	
+#	      |	    /\	
+#	     1,1  1,1 0,2
+#	      |	   |   |		
+#	     1,2  1,2 1,2	
+
+We know that the program terminates at position (1,2) since 
+Is the bottom right corner in our grid. This is our base case.
+
+How can we start accumulating a sum?
+If we are at the end position, we will just return
+The number that is in that final position. This will also be
+A base case.
+
+The bottom row nodes will return a 2. (1,2) on grid.
+
+#		0,0
+#	       /   \
+#	  (13)1,0   0,1	
+#	      |	    /\	
+#	  (8)1,1  1,1 0,2
+#	      |	   |   |		
+#(2)	     1,2  1,2 1,2
+
+
+Let's bubble 2 to (1,1) we need to add
+The 2 and the 6 value from the grid.
+2 + 6 = 8
+
+8 will get bubbled to (1,0) which represents the current
+Value of 5 on the grid so
+8 + 5 = 13
+
+
+We continue to the other sub tree.
+
+#		0,0(18)
+#	       /   \
+#	  (13)1,0   0,1(17)	
+#	      |	    /\	
+#	  (8)1,1 (8)1,1 0,2(14)
+#	      |	   |   |		
+#(2)	     1,2  1,2 1,2
+
+Things get interesting at (0,1) but between 8 and 14
+We bubble the greater number which is 14 since 
+We want a max path sum. Do not forget to add the current
+Position value from the grid as well.
+14+3 = 17
+
+So now between 13 and 17 choose 17 and add the position
+Itself so 17 + 1 = 18.
+
+So basically we choose the target of two children and
+Add the parent. We are applying max sum logic
+While summing up the paths.
+
+R: columns
+C: cols
+Time O(2^(r+c)
+
+Let's improve it with dynamic programming!
+
+Prune the tree from overlapping problems.
+
+#		0,0
+#	       /   \
+#	     1,0   0,1	
+#	      |	    /\	
+#	    1,1  1,1 0,2
+#	      	      |		
+#	             1,2
+
+
+Time O(r*c) 
+Space O(r*c)
+
+
+
+
+
