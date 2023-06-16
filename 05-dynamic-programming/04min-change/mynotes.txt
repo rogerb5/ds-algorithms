@@ -82,7 +82,6 @@ To zero to represent the distance taken.
 #     	0(0)	         0
 
 
-
 Combining bubbled results from previous sub trees
 
 #		 3(0+1)
@@ -156,14 +155,3 @@ Let's memoize and trim the tree by eliminating duplicates!
 
 
 Time: O(a*c)
-
-
-
-
-
-
-
-
-
-
-
