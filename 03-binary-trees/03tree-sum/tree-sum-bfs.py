@@ -46,4 +46,4 @@ def tree_sum(root):
     print(total_sum)
     return total_sum
 
-tree_sum(a)
+tree_sum(a) # -> 21

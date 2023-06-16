@@ -32,4 +32,4 @@ def tree_sum(root):
     return 0
   return root.val + tree_sum(root.left) + tree_sum(root.right)
 
-tree_sum(a)
+tree_sum(a) # 21

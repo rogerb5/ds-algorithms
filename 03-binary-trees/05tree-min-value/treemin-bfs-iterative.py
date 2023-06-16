@@ -44,4 +44,4 @@ def tree_min_value(root):
     print(smallest)
     return smallest
 
-tree_min_value(a)
+tree_min_value(a) # -> -2

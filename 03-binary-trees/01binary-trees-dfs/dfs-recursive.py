@@ -33,4 +33,4 @@ def depth_first_values(root):
   print([root.val] + left_values + right_values)
   return [root.val] + left_values + right_values
 
-depth_first_values(a)
+depth_first_values(a)#['a', 'b', 'd', 'e', 'c', 'f']

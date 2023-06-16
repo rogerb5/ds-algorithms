@@ -21,4 +21,4 @@ def _tribonacci(n, memo):
   print(memo[n])
   return memo[n] 
 
-tribonacci(14)
+tribonacci(14) # -> 927

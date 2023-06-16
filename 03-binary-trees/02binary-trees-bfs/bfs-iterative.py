@@ -46,4 +46,4 @@ def breadth_first_values(root):
     print(values)
     return values
 
-breadth_first_values(a)
+breadth_first_values(a) #['a', 'b', 'c', 'd', 'e', 'f']

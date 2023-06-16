@@ -32,4 +32,4 @@ def tree_min_value(root):
 
     return min(root.val, min_left, min_right)
 
-tree_min_value(a)
+tree_min_value(a) # -> -2

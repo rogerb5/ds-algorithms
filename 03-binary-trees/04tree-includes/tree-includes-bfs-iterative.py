@@ -47,4 +47,4 @@ def tree_includes(root, target):
          
     return False
 
-tree_includes(a, "e")
+tree_includes(a, "e") # -> True
