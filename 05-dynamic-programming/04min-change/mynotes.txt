@@ -32,7 +32,6 @@ We can make until we reach zero.
 #	 1|
 #	  0 
 
-
 Let's look at a path
 
 #  4
@@ -160,7 +159,6 @@ Time: O(c^a)
 Space: O(a)
 
 Let's memoize and trim the tree by eliminating duplicates!
-
 		       	
 #		     4(2)  	
 #		  /  | \   
@@ -172,5 +170,12 @@ Let's memoize and trim the tree by eliminating duplicates!
 #	    |	
 #	    0
 
-
 Time: O(a*c)
+
+The other base case is when we cannot further break down the nodes.
+This means amount < 0 should be a base case so we dont end up here.
+
+Amount 8
+Coin: 12
+
+8 - 12 => 4 force to INF
