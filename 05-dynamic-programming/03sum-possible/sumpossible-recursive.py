@@ -1,3 +1,5 @@
+# incorrect solution
+# All test do not pass
 def sum_possible(amount, numbers):
     if amount < 0:
      return False
@@ -13,4 +15,4 @@ def sum_possible(amount, numbers):
     
     return False
 
-sum_possible(8, [5, 12, 4]) # True, 4 + 4
+sum_possible(8, [5, 12, 4])
