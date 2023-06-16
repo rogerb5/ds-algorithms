@@ -19,8 +19,7 @@ fib(8) => 24
 4 + 7 + 13 = 24
 
 This problem needs to be broken into three sub problems
-And carry on that pattern for as many nodes as we can until
-We hit a base case.
+for as many nodes as we can until we hit a base case.
 
 #			  5
 #		      /   | \
@@ -46,16 +45,22 @@ trib(2) => 1
 
 2 + 1 + 1 => 4, trib(5) => 4
 
-Recursively the complexity time O(3^n)
-			   Space O(n)
+Recursively the complexity
+time O(3^n)
+Space O(n)
 
 
 We will prune the tree according to already existing trees. 
-We will utilize dynamic programming which is a type of problem solving where we use overlapping sub problems. Memoization is one way we can implement dynamic programming. 
+We will utilize dynamic programming 
+which is a type of problem solving 
+where we use overlapping sub problems. 
+Memoization is one way we can implement dynamic programming. 
 The run time would be O(n). 
 For JavaScript we would us an object as a memo.
 For Python we will use a dictionary. 
 For Java a HashMap.
+
+The pruned tree needed to solve the problem
 
 #			5
 #		      / | \
@@ -64,3 +69,4 @@ For Java a HashMap.
 #		  3 2 1 
 #		 /|\
 #		2 1 0
+
