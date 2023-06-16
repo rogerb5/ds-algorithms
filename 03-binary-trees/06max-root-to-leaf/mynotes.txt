@@ -39,7 +39,7 @@ Leafs have no children. We should consider the three paths terminating at a leaf
 5 + 3 + 1 = 9
 
 We want to choose the max path sum which is 20!
-Let's think of some prior problems such as treesum, and min value problem
+Let's think of some prior problems such as tree sum, and min value problem
 So we can combine some knowledge from both solutions.
 
 A recursive code is the best bet for path finding building or determining.
@@ -81,7 +81,7 @@ Compare -inf and 1, so 1 is bigger.
 
 We end up with and we end up at the root:
 
-#         5
+#         5(20)
 #    	/   \
 # (15) 11    3 (4)
 #     / \     \
