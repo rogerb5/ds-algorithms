@@ -1,0 +1,2 @@
+# 06/16/2023
+# non adjacent sum
