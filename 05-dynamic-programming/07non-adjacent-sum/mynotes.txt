@@ -1,2 +1,105 @@
 # 06/16/2023
 # non adjacent sum
+
+We will take an array of some numbers
+And can never add any two numbers next
+(Adjacent)to each other.
+
+
+E.G.
+[2, 4, 5, 12, 7]
+
+The max non adjacent sum is 
+4 + 12 = 16
+
+E.G.
+[7, 5, 5, 12]
+7 + 12 = 19
+
+
+Let's model [2, 4, 5, 12, 7] and find the possibilities 
+That may be summed or not. Because based on the numbers we
+Sum our options may be limited to move on.
+
+
+Our decision tree:
+2 is written along the edge to showcase that its being taken away
+Into the sum, and array becomes smaller in length. 4 cannot be included
+Since it is adjacent to 2.
+
+The other path shows that 2 is excluded from the edge meaning
+We can use 4 in the future. 
+
+Decisions are based on the first
+Element in the array. For example, if we take 5 we cannot take 12.
+Or 5 could not have been taken altogether.
+
+
+#		[2,4,5,12,7]
+#	      2/	    \		
+#	   [5,12,7]	   [4,5,12,7]
+#	 5/	   \      4/	    \
+#      [7]	  [12,7] [12,7]	    [5,12,7]	
+#     7/ \	12/     \	
+#    []	  []	[]	[7]
+
+
+In general given a particular array you can either take or not take the first element. That would decide the remaining elements we can choose from.
+Either slicing off one/two elements from the front of the array.
+
+look at the bottom single 7 if you take 7 from it
+You are left with no options, even if you were not to take 7 you would still be left with an empty array.
+
+On the other hand,
+If you take the 12 you cannot take the 7 anymore. And if you do not take the 12 tiger you can still take the 7.
+
+There are duplicate nodes so this is a dynamic programming problem!
+We should be able to overlapping sub problems such as identical subtrees. 
+
+Base case: 
+the empty [] -> 0 the max non adjacent sum is zero.
+As our problem size gets smaller and smaller and we reach the bottom of the tree
+
+
+Bubbling up:
+
+#		[2,4,5,12,7]
+#	      2/	    \		
+#	   [5,12,7]	   [4,5,12,7]
+#	 5/	   \      4/	    \
+#      [7]	  [12,7] [12,7]	    [5,12,7]	
+#     7/ \	12/     \	
+#(0) []	  []	[]	[7]
+
+
+Bubble up zero and add the 7 along the edge. This that we were including 7 to that 7. The other 0 just bubbles up because we did not include 7 for that sub problem. At this point we choose the largest between 7 and 0, so choose 7.
+
+		
+		  (16)
+#	    (14)[2,4,5,12,7](16)
+#	      2/	    \		
+#      (7+5)[5,12,7](12) (16)[4,5,12,7](12)
+#	 5/	   \      4/	    \
+#      [7]	  [12,7] [12,7](12)  [5,12,7](12)	
+#     7/ \	12/     \	
+#(0) []	  []	[]	[7]
+
+
+There are some duplicate values so we can jot them dow 
+Such as [5, 12, 7]. Also do not forget to add the edge values
+To the bubbled up numbers.
+
+Recursive time complexity
+Time O(2^n) 
+Space O(n)
+
+Dynamic Programming w/memoization
+Time : O(n)
+Space: O(n)
+
+Note: if you really want the linear run time you are going to have to come up with a clever way to represent a logical shrinkage of your array. If you look at nodes of the tree we are chopping the some elements of the array at any point in time.
+
+What you do not want to do is create many copies of the array, a copy runs in linear time, if you create a copy during the recursive calls it becomes very inefficient.
+
+
+
