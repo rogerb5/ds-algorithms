@@ -1,5 +1,5 @@
 # correct solution
-# amount variable changes over time it get smaller and smaller
+# amount variable changes over time it gets smaller and smaller
 def sum_possible(amount, numbers):
   return _sum_possible(amount, numbers, {})
 
