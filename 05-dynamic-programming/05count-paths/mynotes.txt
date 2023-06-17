@@ -1,7 +1,6 @@
 # 06/16/2023
 # Count Paths: Dynamic Programming
 
-
 We will be given a grid in which we want
 To travel from the top left to the bottom right.
 We want to record the amount of ways possible to traverse
@@ -18,24 +17,25 @@ The grid. The caveat is that we can only move right or down
 There are 3 possible ways. However some positions will
 be covered in walls and we cannot travel through them.
 
- x
-[ ][ ][|]
-[ ][ ][ ]x
+Key: | represents a wall
+Key: x represents a person
+ 
+[x][ ][|]
+[ ][ ][x]
 
 1) r, d, r
 2) d, r, r
 
-Let's look at 3 X 3
-Key: x is for the person
+Let's look at 3 X 3 grid
 
 	  0  1  2 
 	0[x][ ][|]
 	1[ ][ ][ ]
 	2[ ][ ][ ]
 
-And let's visualize it as a tree if we start at (0,0) the root
-If we move downward we would get (1,0) or if we moved to the right
-We would get (0,1)
+Visualize it as a tree starting at (0,0) the root.
+If we move down we get (1,0) or if we moved to the right
+we get (0,1)
 
 So in this case let's say we moved to the right by one
 
@@ -51,6 +51,7 @@ So in this case let's say we moved to the right by one
 
 
 The entire tree would look like this for
+A 3X3 grid including the wall.
 
 #	  0  1  2 
 #	0[ ][ ][|]
@@ -92,13 +93,15 @@ Tree representation of the path taken
 #	 |
 #	2,2
 
+Base Case:
 How can we code a base case? Visualizing trees can help us
-Implement recursion. Our goal is to reach (2,2)
+implement recursion. Our goal is to reach (2,2)
 So that should be its own input!
 
+Base Case:
 How many ways can you get from the bottom right position
-To the bottom right position. It is only 1 since we are 
-Already there.
+to the bottom right position? It is only 1 since we are 
+already there!
 
 #	  0  1  2 
 #	0[ ][ ][|]
@@ -123,7 +126,7 @@ We need to stop at 1,1 because we will be bubbling up two 1's
 So at (1,1) do 1 + 1 => 2
 
 This is saying there are twos ways of getting to the position
-(2,2)- bottom right corner from (1,1)
+(2,2) - bottom right corner from (1,1)
 
 One way:
 #	  0  1  2 
@@ -136,8 +139,6 @@ The other way:
 #	0[ ][ ][|]
 #	1[ ][#][#]
 #	2[ ][ ][#]
-
-
 
 So let's keep bubbling up and adding paths.
 
@@ -152,8 +153,8 @@ So let's keep bubbling up and adding paths.
 #	 2,2  2,2 2,2 2,2 2,2	
 
 
-There are 5 ways of traveling from the top left to the bottom
-Right!
+There are 5 path of traveling from the top left to the bottom
+right!
 
 Brute force recursion. It's too slow!
 Time O(2^(r+c))
@@ -163,7 +164,7 @@ We need to move through all rows and columns thats why its r+c
 Okay let's improve it using dynamic programming. 
 Let's memoize duplicate function calls and prune the tree
 If our grid would to grow then there would be more overlapping 
-Of sub problem so memoization works for this.
+sub problems, so memoization will improve our run time.
 
 Pruned tree:
 
@@ -181,10 +182,4 @@ Pruned tree:
 Dynamic programming w/memoization
 Time O(r * c)
 
-Once a row and column are memoize we will not need to compute it again.
-
-
-
-
-
-
+Once a row and column are memoized we will not need to compute it again.
