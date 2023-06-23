@@ -1,0 +1,51 @@
+# 06/23/23
+# linked list values
+
+Return all the values within the linked list in order
+
+a->b-c->d
+
+Traversing in order iterative
+
+values: []
+
+a -> b -> c -> d
+^
+c
+
+First, current is equal to the head
+then make current = current.next
+Add the value into the collection, and so forth.
+
+values: [a]
+
+a -> b -> c -> d
+     ^
+   c.next
+
+
+values: [a, b, c]
+
+a -> b -> c -> d
+          ^
+       c.next
+
+
+values: [a, b, c, d]
+
+a -> b -> c -> d
+               ^
+            c.next 
+
+When current equals null that is when we finish traversing
+and it is the end of the linked list!
+
+values: [a, b, c, d]
+
+a -> b -> c -> d -> /
+                    ^
+                    c 
+Complexity
+N = # of nodes
+Time: O(n)
+Space: O(n)
