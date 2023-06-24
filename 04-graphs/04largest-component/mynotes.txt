@@ -1,0 +1,78 @@
+# 06/24/2023
+# largest component
+
+
+Graph: {
+ 0: [8, 1, 5],
+ 1: [0],
+ 5: [0, 8],
+ 8: [0, 5],
+ 2: [3, 4],
+ 3: [2, 4],
+ 4: [3, 2]
+}
+
+Visual representation:
+It could contain multiple components 
+(Two islands)
+
+Size = 4, as number of nodes
+
+           5
+           | \
+       1 - 0 - 8
+
+Size = 3, as number of nodes
+
+     4 - 2
+     \   /
+       3
+
+So our program should return 4 as the biggest component.
+Key: x is visited
+
+Algorithm:
+
+Nodes:
+
+0 <-
+1 <- has been visited don't traverse
+2 
+3
+4
+5
+8
+
+           x5
+           | \
+       x1 - x0 - x8
+
+Each of nodes will be treated as single nodes of 1
+And add them all up to get 4. So store 4 as largest!
+And continue the iterative code.
+
+Nodes:
+
+0 
+1 
+2 <- 
+3
+4
+5
+8
+
+	 x4 - 2x
+          \   /
+           x3
+
+
+The rest of the nodes do not need to be traversed
+Since they have already been visited! So compare 3 and 4
+But 4 is largest! 
+
+Complexity:
+n = # nodes
+e = # edges
+
+Time: O(e)
+Space: O(n)
