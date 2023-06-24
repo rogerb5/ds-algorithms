@@ -1,0 +1,86 @@
+# 06/23/2023
+# linked list find
+
+Target c
+
+
+a -> b -> c -> d should return true
+
+
+Iterative approach
+
+1st iteration:
+
+h
+a -> b -> c -> d
+^
+c
+
+Does a equal c? No, current = current.next
+
+2nd iteration:
+
+h
+a -> b -> c -> d
+     ^
+     c
+
+Does b equal c? No, current = current.next
+
+3rd iteration:
+
+h
+a -> b -> c -> d
+          ^
+          c
+
+Does c equal c? Yes, so return true.
+
+Let's say our target was G instead
+Eventually we know current will be equal to null.
+Since we did not see the target value so return false.
+
+h
+a -> b -> c -> d -> /
+                    ^
+                    c
+
+Recursive approach:
+Think of base cases as their own valid inputs!
+
+Base case: if head.val equals target, then return true
+Base case: if head is null, then return false
+
+Target c
+
+1st call:
+
+(a) -> b -> c -> d 
+
+
+2nd call:
+
+a -> (b) -> c -> d 
+
+
+3rd call: It's true so return true up the call stack
+
+          True
+a -> b -> (c) -> d 
+
+
+To the first call
+
+True
+a -> b -> (c) -> d 
+
+
+How about target G? Return false up the call stack
+Since the head is null. D's next is null!
+ Base case 2 is used, linked list is empty
+
+                FALSE
+a -> b -> c -> d ()
+                  
+Time complexity: O(n)
+Space Complexity: O(n) because of the recursive call stack
