@@ -1,0 +1,111 @@
+# 06/23/2023
+# Sum List
+
+Return the total sum of all the values 
+of the linked list.
+
+Sum: 20
+
+2 -> 8 -> 3 -> 7
+
+1st iteration ------------------
+
+Sum = 2
+
+2 -> 8 -> 3 -> 7
+^
+c
+
+current = current.next
+
+2nd iteration -------------------
+
+Sum = 10
+
+2 -> 8 -> 3 -> 7
+     ^
+     c
+
+current = current.next
+
+
+3rd iteration ----------------
+
+Sum = 13
+
+2 -> 8 -> 3 -> 7
+          ^
+          c
+
+current = current.next
+
+
+4th iteration-------------
+
+
+Sum = 20
+
+2 -> 8 -> 3 -> 7
+               ^
+               c
+
+current = current.next
+
+5 iteration-----------------
+
+Stop the iteration when current
+Equals null
+
+2 -> 8 -> 3 -> 7 -> /
+                    ^
+                    c
+
+Complexity:
+
+N = # of nodes
+Time O(n)
+Space: O(1)
+
+
+Recursive explanation:
+
+Call on the head node of 2, then call
+on the 8 node, then 3 node, finally 7 node until you reach
+The base case.
+
+
+2 -> 8 -> 3 -> 7 -> /
+
+The base case:
+
+If node is null then return 0
+
+Then the values are added in reverse!
+
+1st call:
+                    0
+2 -> 8 -> 3 -> 7 -> /
+
+2nd call:
+               7
+2 -> 8 -> 3 -> 7 -> /
+
+
+3rd call:
+         10
+2 -> 8 -> 3 -> 7 -> /
+
+
+4th call:
+    18
+2 -> 8 -> 3 -> 7 -> /
+
+5th call:
+
+20
+2 -> 8 -> 3 -> 7 -> /
+
+Recursive 
+N = # of nodes
+Time: O(n)
+Space: O(n) because of the call stack
