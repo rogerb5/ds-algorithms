@@ -1,0 +1,142 @@
+# 06/24/2023
+# shortest path
+
+Graph as an edge list -> adjacency list
+
+Edges: 
+ [w,x],
+ [x, y],
+ [z, y],
+ [z, v],
+ [w, v]
+
+Visual graph:
+
+     x - y
+    /     \
+    w      z  
+    \     /
+     \ v /
+
+
+Start: w
+End: z
+
+Return smallest path between those two nodes
+
+Path 1: length is 3 is the number of edges
+
+   x - y
+  /     \
+  w      z
+
+Path 2: length is 2, is the number of edges
+
+   w      z  
+    \     /
+     \ v /
+
+
+Let's look at an abstract example
+DFS, we want to figure out the shortest path between those two nodes.
+In the long run 2 should be the answer!
+
+
+o - o - o - o - o - o
+o - o - o - o - o - o
+o - o - (o) - o - o - o
+o - (o) - o - o - o - o
+o - o - o - o - o - o
+o - o - o - o - o - o
+
+We would have to explore deeply and it would not be the shortest
+Path. A DFS may be unlucky and find the target node late!
+
+A BFS, explore all nodes one edge away from start, then 
+Explore two node two edges away. Once you hit the target you
+Well get two!
+
+o - o - o - o - o - o
+o - o - o - o - o - o
+o - o - (o) - o - o - o
+o - (o) - o - o - o - o
+o - o - o - o - o - o
+o - o - o - o - o - o
+
+
+
+Algorithmically
+
+BFS: will use a queue
+The node of w is zero because it is a starting point
+(node, distance)
+
+
+Queue: (w, 0)
+
+Current: (w, 0)
+
+
+     x - y
+    /     \
+c  xw      z  
+    \     /
+     \ v /
+
+
+Now explore w's neighbors which are x and v
+
+Queue: (v, 1) (x, 1) 
+Current: (w, 0)
+
+So now remove the front of the queue.
+
+
+c    xx - y
+    /     \
+   xw      z  
+    \      /
+     \ xv /
+
+
+Queue: (v, 1)
+Current: (x, 1)
+
+And look at x's neighbors, bear in mind 
+x has two neighbors because we have an undirected graph.
+W, and y as neighbors. So track visited! We should only care about y!
+
+
+     xx - xy 
+    /      \ 
+   xw       z  
+    \      /
+     \ xv /
+
+
+Queue: (y, 2) (v, 1)
+Current: (x, 1)
+
+So remove the front of the queue which is the v node.
+
+Queue: (y, 2) 
+Current: (v, 1)
+
+     xx - xy
+    /      \
+   xw       xz  
+    \      /
+ 1   \ xv /  2
+       c
+
+At this point consider v's neighbor, so add z to the queue 
+And tag with distance of 2. If v has a distance of one then neighbor is one greater!
+
+Queue: (z, 2) (y, 2) 
+Current: (v, 1)
+
+
+Eventually z will the queue and that is the target node!
+
+Distance is tracked if you begin with your queue of distance of zero
+So when something leaves a queue and adds its neighbors so increment distance by one!
