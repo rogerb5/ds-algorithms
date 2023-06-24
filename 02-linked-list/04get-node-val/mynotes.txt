@@ -1,0 +1,67 @@
+# 06/23/2023
+# get node value
+
+Iterative approach: 
+
+Target index 2: c
+Return the nodes value at a certain index
+
+a -> b -> c -> d # returns c
+
+
+Iteration 1:
+Count = 0
+
+a -> b -> c -> d
+^
+c
+
+Current =  current.next
+
+Iteration 2:
+Count = 1
+
+a -> b -> c -> d
+     ^
+     c
+
+Current =  current.next
+
+
+Iteration: 3:
+Count = 2
+
+a -> b -> c -> d
+          ^
+          c
+  
+Current =  current.next
+
+Target index equals count so return 
+node.val 
+
+Iterative
+N = # of nodes
+Time: O(n)
+
+Recursive Approach: should decrement the index on every call.
+
+target index 2
+
+Iteration 1, Index 2:
+
+(a) -> b -> c -> d
+
+Iteration 2, Index 1:
+
+a -> (b) -> c -> d
+
+Iteration 3, Index 0:
+
+a -> b -> (c) -> d
+
+Base case: if index equal 0
+return node.val, c will be returned up the stack
+
+Time: O(n)
+Space: O(n)
