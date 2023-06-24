@@ -1,0 +1,76 @@
+# 06/23/2023
+# Reverse List
+
+a -> b -> c -> d
+
+Should mutate to
+
+d -> c -> b -> a
+
+And return the new head of the list.
+In this case d.
+
+Iterative approach:
+Three variables 
+Prev = null
+Current = a
+Current.next = b
+
+/ -> a -> b -> c -> d
+^    ^    ^
+p    c   c.n
+
+We need to set current.next to point to prev
+So a point to null
+
+/ <- a  b -> c -> d
+^    ^  ^
+p    c  c.n
+
+So now shift
+
+/ <- a <- b  c -> d
+     ^    ^  ^
+     p    c  c.n
+
+And the process continues
+
+/ <- a <- b <- c   d
+          ^    ^   ^
+          p    c  c.n
+
+As we reach the end of the linked list
+We have to remember, d is the old tail
+Of the linked list, it did have the next pointer
+Point to null
+
+/ <- a <- b <- c   d -> /
+               ^   ^    ^
+               p   c   c.n
+
+The algorithm continues:
+
+/ <- a <- b <- c <- d   /
+               ^    ^   ^
+               p    c  c.n
+
+If we set current to be the next then
+current will be at null, and this is the end of the linked list!
+The algorithm will stop.
+
+
+/ <- a <- b <- c <- d   /
+                    ^   ^
+                    p   c 
+
+/ <- a <- b <- c <- d  
+                    ^   
+                    p  
+
+To return the head of the new linked list
+get the final value of the previous (p) variable
+
+Complexity
+N = # of nodes
+Time: O(n)
+Space: O(1)
