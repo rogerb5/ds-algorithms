@@ -1,0 +1,113 @@
+# 06/24/2023
+# Has Path
+
+We are going to use an adjacency list
+as a graph. Each key of the list will represent
+a node.
+
+f: [g,i],
+g: [h],
+h: [],
+i: [g,k],
+j: [I],
+k: []
+
+
+A directed graph shows arrowheads, and the 
+graph is acylic (no cycles). We do not need to consider
+infinite cycles.
+
+f -> g -> h
+^   ^
+|  /
+| /
+i <- j
+|
+|
+v
+k
+
+E.G. a cycle, so a traversal would produce
+An infinite loop
+
+a <- c
+|   ^
+|  /
+v /
+b
+
+For this problem we want to take a source and destination
+Node. We want to return true or false of 
+We can travel from the source to the destination.
+This problem can be solved using both breadth/depth
+first searches.
+
+Depth first search approach
+
+Src: f, 1st: f
+
+Start at f, g, h, i, g, h, i, k
+
+True, there is a path
+
+
+f -> g -> h
+^   ^
+|  /
+| /
+i <- j
+|
+|
+v
+k
+
+E.G. a non-existent path
+
+Src: j, dst: f
+
+Start at j, i, k, g, h
+
+f -> g -> h
+^   ^
+|  /
+| /
+i <- j
+|
+|
+v
+k
+
+
+So if you finish the traversal wit dfs/bfs
+Just return false since there is no such path from
+Source to destination.
+
+
+You can either use a
+Stack (recursive) - DFS
+Queue (iteratively) - BFS
+
+Complexity:
+n = # nodes
+e = # edges
+
+Time: O(e)
+Space: O(n)
+
+Or
+
+n = # nodes
+n^2 = # edges
+
+
+Worst case graph
+
+a  <-  c
+ ^ ->
+||   ^
+||  / /
+v  / /
+    v
+b
+
+Edges going in both directions.

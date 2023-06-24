@@ -1,0 +1,122 @@
+# 06/24/2023
+# undirected graph
+
+An edge list for an undirected graph.
+Every pair in this edge list represents 
+A connection between two nodes.
+
+edges: [
+ [i, j],
+ [k, i],
+ [m, k],
+ [k, l],
+ [o, n]
+]
+
+Convert the edges list -> adjacency list
+Bear in mind that we know that graph is undirected 
+Make sure you have the inverse connection.
+
+graph: {
+ i: [j, k],
+ j: [i],
+ k: [i, m, l]
+ m: [k],
+ l: [k]
+ o: [n],
+ n: [o]
+}
+
+Now we can traverse! So visualize the graph.
+For this graph we need to handle if it has a cycle.
+This is true for undirected graphs! 
+
+i - j
+| /
+k - l
+|
+m
+
+o - n
+
+
+There is a cycle of length 3, which
+may result in an infinite loop.
+
+i - j
+| /
+k 
+
+O and n are bidirectional, so watch out for all types
+Of cycle
+
+O - n
+
+DFS Approach: To avoid infinite traversals
+we want to mark visited nodes. Visitation
+can be coded in different ways such as using a set.
+This will be used to guard against cycles.
+
+
+Src: i, dst: l 
+
+i - j
+| /
+k - l
+|
+m
+
+o - n
+
+
+visited neighbors: i, j, k
+
+Since I has been visited go back to k
+
+visited neighbors: i, j, k, l
+
+L is the destination so there is a path from 
+Source and return true.
+
+
+E.G. src: k, dst: o, there is no way to get from k to o 
+Since they are disconnected
+
+i - j
+| /
+k - l
+|
+m
+
+o - n
+
+Visited: k, i , j, l, m
+
+The graph has been visited 
+And there is no path from the source node to 
+Destination, so return false.
+
+n = # nodes
+e = edges
+
+Time: O(e)
+Space: O(n)
+
+Worse case graph:
+Is there a path between a and z
+
+You would have to visit a, b, c, d, e,
+So time is O(e)
+Space is O(n) every visited nodes would
+Be added to the stack or queue.
+
+a -> b -> c -> d -> e
+
+z
+
+
+
+
+
+
+
