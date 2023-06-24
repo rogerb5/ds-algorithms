@@ -1,0 +1,195 @@
+# 06/24/2023
+# Zipper lists
+
+List one:
+a -> b -> c
+
+List two:
+q -> r -> s
+
+
+We need to create a linked list that has 
+Alternating nodes from each list. Always
+Start with the node from list one.
+
+Zipper list:
+a -> q -> b -> r -> c -> s
+
+Another example:
+Edge case:
+
+We do not have many assumptions about lengths.
+Each list is non empty! What if one list
+is longer than the other?
+
+Alternate as much as you can and then terminate
+The linked list with the remaining nodes.
+
+
+a -> b -> c -> d -> e -> f
+
+q -> r
+
+
+a -> q -> b -> r -> c -> d -> e -> f
+
+
+Approach: have two pointers for each list, start with
+the head node of list one, and track the tail of the new list.
+
+To set an alternating pattern we can use a counter variable.
+Have it start at zero, and based if the count is even or odd that would
+indicate which list you can take your node from.
+
+An even count takes from list2
+An odd count takes from list1
+
+h1
+a -> b -> c -> d -> e -> f
+^
+c1
+
+
+h2
+q -> r
+^
+c2
+
+
+New List:
+
+t
+a
+
+Add current1 (a) to the new list, and iterate c1 forward
+count = 0, so grab node from list2. Start tracking tail of the new list.
+
+
+h1
+a -> b -> c -> d -> e -> f
+     ^
+     c1
+
+
+h2
+q -> r
+^
+c2
+
+
+New List:
+
+t
+a
+
+Add current2 (q) to the new list, and iterate c2 forward
+count = 1, so grab next node from list1. Move new list tail forward.
+
+h1
+a -> b -> c -> d -> e -> f
+     ^
+    c1
+
+
+h2
+q -> r
+     ^
+    c2
+
+
+New List:
+
+     t
+a -> q
+
+Add current1 (b) to the new list, and iterate c1 forward
+count = 2, so grab next node from list2. Move new list tail forward.
+
+h1
+a -> b -> c -> d -> e -> f
+          ^
+         c1
+
+
+h2
+q -> r
+     ^
+    c2
+
+
+New List:
+
+          t
+a -> q -> b
+
+
+Add current2 (r) to the new list, and iterate c2 toward null
+count = 3, so grab next node from list1. Move new list tail forward.
+
+h1
+a -> b -> c -> d -> e -> f
+          ^
+         c1
+
+
+h2
+q -> r -> /
+          ^
+         c2
+
+
+New List:
+
+               t
+a -> q -> b -> r
+
+
+All of the nodes from list2 have been exhausted, so we should terminate
+the output with the remaining nodes from the non empty nodes. So in this case
+grab everything at current1 and after; put the nodes at the tail in the new list.
+Technically we do not need to iterate through all the list.
+
+
+New List:
+               t
+a -> q -> b -> r -> c -> d -> e -> f
+
+
+Time complexity: 
+n = length of list 1
+m - length of list 2
+
+Time: O(min(n, m))
+Space: O(1)
+
+
+Recursive approach:
+
+h1
+a -> b -> c
+     ^
+     n1
+
+h2
+x -> y -> z
+     ^
+     n2
+
+
+Let's rewire
+head_1.next = head_2
+head_2.next = zipper_lists(next_1, next_2) 
+
+Use the recursive leap of faith
+
+h1
+b -> c
+^
+n1
+
+h2
+y -> z
+^
+n2
+
+a -> x -> b -> y ....
